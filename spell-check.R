@@ -7,28 +7,33 @@
 arguments <- commandArgs(trailingOnly = TRUE)
 file_pattern <- "\\.(Rmd|md|rmd)$"
 
+# dictionary is required first argument
+dict_file <- arguments[1]
+
+arguments <- arguments[-1]
 # if there are arguments, check those files, otherwise check all markdown & rmd files
-if (length(arguments) > 0) {
+if (length(arguments) > 1) {
   files <- arguments[grepl(file_pattern, arguments)]
 } else {
   files <- list.files(pattern = file_pattern, recursive = TRUE, full.names = TRUE)
 }
 
-# Find .git root directory
-root_dir <- rprojroot::find_root(rprojroot::has_dir(".git"))
-
-# Read in dictionary
-dict_file <- file.path(root_dir, "components", "dictionary.txt")
-dictionary <- readLines(dict_file)
+if (file.exists(dict_file)) {
+    dictionary <- readLines(dict_file)
+} else {
+    warning("Dictionary file not found")
+    dictionary <- ""
+}
 
 # Run spell check
-spelling_errors <- spelling::spell_check_files(files, ignore = dictionary_plus) |>
+spelling_errors <- spelling::spell_check_files(files, ignore = dictionary) |>
   data.frame() |>
   tidyr::unnest(cols = found) |>
   tidyr::separate(found, into = c("file", "lines"), sep = ":")
 
-# Print out how many spell check errors
-write(nrow(spelling_errors), stdout())
 
-# Save spell errors to file
+# Save spelling errors to file
 readr::write_tsv(spelling_errors, "spell_check_errors.tsv")
+
+# Save error count to GITHUB_OUTPUT
+system(paste0("echo 'error_count=", nrow(spelling_errors), "'>> $GITHUB_OUTPUT"))
