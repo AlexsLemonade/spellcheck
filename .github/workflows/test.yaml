@@ -3,7 +3,7 @@ on: [push]
 jobs:
   spell-check:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Test the spell check action
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Spell check action
         uses: ./ # Uses an action in the root directory
-        id: spell 
+        id: spell
       # Use the output from the `spell check` step
       - name: Get the number of errors
         run: |
