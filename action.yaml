@@ -6,11 +6,11 @@ inputs:
     description: 'Dictionary file path'
     required: true
     default: 'components/dictionary.txt'
-  files: 
+  files:
     description: Glob of files to check
     required: false
 outputs:
-  error_count: 
+  error_count:
     description: The number of spelling errors
 runs:
   using: 'docker'
@@ -18,4 +18,3 @@ runs:
   args:
     - ${{ inputs.dictionary }}
     - ${{ inputs.files }}
- 
