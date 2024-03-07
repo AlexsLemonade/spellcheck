@@ -1,0 +1,20 @@
+# action.yml
+name: 'R spell check'
+description: 'Spell check R, Rmd and md files'
+inputs:
+  dictionary:  # id of input
+    description: 'Dictionary file path'
+    required: true
+    default: 'components/dictionary.txt'
+  files: 
+    description: Glob of files to check
+    required: false
+outputs:
+  error_count: 
+    description: The number of spelling errors
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dictionary }}
+    - ${{ inputs.files }}
