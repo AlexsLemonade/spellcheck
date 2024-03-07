@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.authors="CCDL ccdl@alexslemonade.org"
 LABEL org.opencontainers.image.source="https://github.com/AlexsLemonade/spellcheck/tree/main"
 
 # install the spelling and tidyr packages from CRAN
-RUN Rscript -e "install.packages(c('spelling', 'tidyr'))"
+RUN Rscript -e "install.packages(c('readr', 'spelling', 'tidyr'))"
 
 # add spell check script and make it executable
 COPY spell-check.R /spell-check.R
