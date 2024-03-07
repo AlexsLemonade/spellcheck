@@ -11,6 +11,6 @@ RUN Rscript -e "install.packages(c('spelling', 'tidyr'))"
 
 # add spell check script and make it executable
 COPY spell-check.R /spell-check.R
-RUN chmod +x spell-check.R
+RUN chmod +x /spell-check.R
 
 ENTRYPOINT ["/spell-check.R"]
