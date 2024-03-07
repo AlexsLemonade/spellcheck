@@ -33,7 +33,7 @@ spelling_errors <- spelling::spell_check_files(files, ignore = dictionary) |>
 
 
 # Save spelling errors to file
-readr::write_tsv(spelling_errors, "spell_check_errors.tsv")
+write.csv(spelling_errors, "spell_check_errors.tsv", sep = "\t")
 
 # Save error count to GITHUB_OUTPUT
 system(paste0("echo 'error_count=", nrow(spelling_errors), "'>> $GITHUB_OUTPUT"))
