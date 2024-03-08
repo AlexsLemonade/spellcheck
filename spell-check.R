@@ -12,7 +12,7 @@ dict_file <- arguments[1]
 
 arguments <- arguments[-1]
 # if there are arguments, check those files, otherwise check all markdown & rmd files
-if (length(arguments) > 1) {
+if (length(arguments) > 0) {
   files <- arguments[grepl(file_pattern, arguments)]
 } else {
   files <- list.files(pattern = file_pattern, recursive = TRUE, full.names = TRUE)
