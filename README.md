@@ -3,7 +3,7 @@
 This repository contains a GitHub action to run the [R `spelling` package](https://cran.r-project.org/web/packages/spelling/index.html).
 The role of this action is to facilitate spell checking actions across `AlexsLemonade` repositories.
 
-Currently the action will only spell check text in Rmd and md files
+Currently the action will only spell check text in Markdown (`.md`) and Rmarkdown (`.Rmd`) files.
 
 ## Usage
 
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Spell check action
-        uses: alexslemonade/spellcheck
+        uses: alexslemonade/spellcheck@v0
         id: spell
         with:
           dictionary: components/dictionary.txt
@@ -48,4 +48,5 @@ Note that the `dictionary` input to the spell check step is optional and default
 If you want to use a different dictionary, you can specify the path to the dictionary file in your repository.
 
 You can also specify specific files to spell check using the `files` input to the `alexslemonade/spellcheck` step.
+Note that the file extenstion restriction will still apply.
 Globs should work as expected.
