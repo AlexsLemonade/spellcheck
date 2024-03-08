@@ -16,5 +16,5 @@ runs:
   using: "docker"
   image: ghcr.io/alexslemonade/spellcheck:edge
   args:
-    - ${{ inputs.dictionary || 'components/dictionary.txt'  }}
+    - ${{ inputs.dictionary || '/dev/null'  }}
     - ${{ inputs.files }}
