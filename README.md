@@ -32,7 +32,7 @@ jobs:
           dictionary: components/dictionary.txt
 
       - name: Upload spell check errors
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: spell_check_errors
           path: spell_check_errors.tsv
