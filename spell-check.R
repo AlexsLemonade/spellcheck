@@ -5,7 +5,7 @@
 # To modify this behavior, provide a command-line argument with the extensions to check.
 
 arguments <- commandArgs(trailingOnly = TRUE)
-file_pattern <- "\\.(Rmd|md|rmd)$"
+file_pattern <- "(?i)\\.(md|rmd)$"
 
 # dictionary is required first argument
 dict_file <- arguments[1]
