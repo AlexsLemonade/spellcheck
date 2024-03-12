@@ -5,7 +5,8 @@ on:
     branches:
       - main
     tags:
-      - "v*"
+      # only run with semver tags
+      - "v*.*.*"
   pull_request:
     branches:
       - main
