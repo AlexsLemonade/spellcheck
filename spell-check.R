@@ -14,7 +14,10 @@ dict_file <- arguments[1]
 arguments <- arguments[-1]
 # if there are arguments, check those files, otherwise check all markdown & rmd files
 if (length(arguments) > 0 && arguments[1] != "") {
-  files <- arguments[grepl(file_pattern, arguments)]
+  files_glob <- strsplit(arguments, " ") |>
+    unlist() |>
+    Sys.glob()
+  files <- grep(file_pattern, files_glob, value = TRUE)
 } else {
   files <- list.files(pattern = file_pattern, recursive = TRUE, full.names = TRUE)
 }
