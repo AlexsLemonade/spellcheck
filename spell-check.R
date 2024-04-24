@@ -16,7 +16,8 @@ arguments <- arguments[-1]
 if (length(arguments) > 0 && arguments[1] != "") {
   files_glob <- strsplit(arguments, " ") |>
     unlist() |>
-    Sys.glob()
+    Sys.glob() |>
+    unique()
   files <- grep(file_pattern, files_glob, value = TRUE)
 } else {
   files <- list.files(pattern = file_pattern, recursive = TRUE, full.names = TRUE)
