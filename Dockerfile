@@ -1,5 +1,5 @@
 # A docker file for establishing a spellcheck environment in R
-FROM rocker/r-ver:4.3.2
+FROM rocker/r-ver:4.4.0
 
 # Labels following the Open Containers Initiative (OCI) recommendations
 # For more information, see https://specs.opencontainers.org/image-spec/annotations/?v=v1.0.1
