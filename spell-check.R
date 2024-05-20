@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 #
 # Run spell check and save results.
 # By default, all R Markdown and markdown files will be checked.
