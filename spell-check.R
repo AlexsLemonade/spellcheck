@@ -38,12 +38,11 @@ file_list <- split(files, dirname(files))
 
 # check spelling for all files in each path, and prepend the file path
 #  to the file name in the final data frame
-spelling_errors <- all_paths |>
-  purrr::map(
-    \(path) {
-      list.files(path = path, pattern = file_pattern) |>
-        spelling::spell_check_files(ignore = dictionary) |>
-        data.frame() |>
+spelling_errors <- file_list |>
+  purrr::imap(
+    \(files, path) {
+      spelling::spell_check_files(files, ignore = dictionary) |>
+      data.frame() |>
         tidyr::unnest(cols = found) |>
         tidyr::separate(found, into = c("file", "lines"), sep = ":") |>
         dplyr::mutate(file = file.path(path, file))
