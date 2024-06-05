@@ -33,9 +33,7 @@ if (file.exists(dict_file)) {
 
 
 # Separate files into path groups
-all_paths <- files |>
-  dirname() |>
-  unique()
+file_list <- split(files, dirname(files))
 
 
 # check spelling for all files in each path, and prepend the file path
