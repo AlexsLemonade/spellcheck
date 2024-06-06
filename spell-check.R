@@ -31,11 +31,24 @@ if (file.exists(dict_file)) {
   dictionary <- ""
 }
 
-# Run spell check
-spelling_errors <- spelling::spell_check_files(files, ignore = dictionary) |>
-  data.frame() |>
-  tidyr::unnest(cols = found) |>
-  tidyr::separate(found, into = c("file", "lines"), sep = ":")
+
+# Separate files into path groups
+file_list <- split(files, dirname(files))
+
+
+# check spelling for all files in each path, and prepend the file path
+#  to the file name in the final data frame
+spelling_errors <- file_list |>
+  purrr::imap(
+    \(files, path) {
+      spelling::spell_check_files(files, ignore = dictionary) |>
+        data.frame() |>
+        tidyr::unnest(cols = found) |>
+        tidyr::separate(found, into = c("file", "lines"), sep = ":") |>
+        dplyr::mutate(file = file.path(path, file))
+    }
+  ) |>
+  dplyr::bind_rows()
 
 
 # Save spelling errors to file
