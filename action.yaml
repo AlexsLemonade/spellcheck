@@ -14,7 +14,7 @@ outputs:
     description: The number of spelling errors
 runs:
   using: "docker"
-  image: docker://ghcr.io/alexslemonade/spellcheck:v0.2.1
+  image: docker://ghcr.io/alexslemonade/spellcheck:v0.3.1
   args:
     - ${{ inputs.dictionary || '/dev/null'  }}
     - ${{ inputs.files }}
